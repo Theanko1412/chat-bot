@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: localhost
+    url: jdbc:postgresql://localhost:5433/chatbot
     username: user
     password: password
     driver-class-name: org.postgresql.Driver
