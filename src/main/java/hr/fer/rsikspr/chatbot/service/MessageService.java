@@ -4,8 +4,6 @@ import hr.fer.rsikspr.chatbot.model.Conversation;
 import hr.fer.rsikspr.chatbot.model.Message;
 import hr.fer.rsikspr.chatbot.repository.ConversationRepository;
 import hr.fer.rsikspr.chatbot.repository.MessageRepository;
-import jakarta.persistence.EntityNotFoundException;
-import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,31 +14,27 @@ public class MessageService {
   private final MessageRepository messageRepository;
   private final ConversationRepository conversationRepository;
 
-  public Message addMessageToConversation(String conversationId, Message message) {
-    Conversation conversation = conversationRepository.findConversationById(conversationId)
-        .orElseThrow(() -> new EntityNotFoundException("Conversation with a given id doesnt exist."));
-
-    message.setConversation(conversation);
-    conversation.getMessages().add(message);
-
-    messageRepository.save(message);
-    conversationRepository.save(conversation);
-    return message;
-  }
-
+  // adding message to conversation, if conversation doesn't exist, it will be created
+  // conversation is same for 2 participants no matter who is sender and who is receiver
   public Message addMessage(Message message) {
-    Conversation conversation = conversationRepository.findConversationByInitialSenderAndInitialReceiver(message.getSender(), message.getReceiver())
-        .orElseGet(() -> {
-          Conversation conv = new Conversation(message.getSender(), message.getReceiver());
-          return conversationRepository.save(conv);
-        });
+    Conversation conversation = conversationRepository
+        // TODO: move to custom query
+        .findConversationByInitialSenderAndInitialReceiver(
+            message.getSender(), message.getReceiver())
+        .orElseGet(() -> conversationRepository
+            .findConversationByInitialSenderAndInitialReceiver(
+                message.getReceiver(), message.getSender())
+            .orElseGet(() -> {
+              Conversation conv = new Conversation(message.getSender(), message.getReceiver());
+              return conversationRepository.save(conv);
+            }));
 
     message.setConversation(conversation);
     messageRepository.save(message);
 
-    conversation.addMessage(message);
+    conversation.addMessageToList(message);
     conversationRepository.save(conversation);
+
     return message;
   }
-
 }

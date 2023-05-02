@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface ConversationRepository extends JpaRepository<Conversation, String> {
 
   Optional<Conversation> findConversationById(String id);
-  Optional<Conversation> findConversationByInitialSenderAndInitialReceiver(String initialSender, String initialReceiver);
 
+  Optional<Conversation> findConversationByInitialSenderAndInitialReceiver(
+      String initialSender, String initialReceiver);
 }

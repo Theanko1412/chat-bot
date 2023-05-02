@@ -1,22 +1,15 @@
 package hr.fer.rsikspr.chatbot.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,24 +20,19 @@ public class Message {
 
   @Id
   @GeneratedValue(generator = "uuid")
-  @GenericGenerator(
-      name = "uuid",
-      strategy = "org.hibernate.id.UUIDGenerator"
-  )
+  @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
   @Column(name = "message_id")
   private String id;
 
-  @NonNull
-  @Column(name = "sender")
+  @NotNull @Column(name = "sender")
   private String sender;
-  @NonNull
-  @Column(name = "receiver")
+
+  @NotNull @Column(name = "receiver")
   private String receiver;
-  @NonNull
-  @Column(name = "content")
+
+  @NotNull @Column(name = "content")
   private String content;
 
-  @NonNull
   @Column(name = "timestamp")
   private LocalDateTime timestamp;
 

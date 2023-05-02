@@ -1,6 +1,5 @@
 package hr.fer.rsikspr.chatbot.repository;
 
-import hr.fer.rsikspr.chatbot.model.Conversation;
 import hr.fer.rsikspr.chatbot.model.Message;
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +12,4 @@ public interface MessageRepository extends JpaRepository<Message, String> {
   Optional<List<Message>> findMessagesBySender(String sender);
 
   Optional<List<Message>> findMessagesByReceiver(String receiver);
-
-  Optional<List<Message>> findMessagesByConversation(Conversation conversation);
-
 }

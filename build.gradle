@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.2'
 	id 'io.spring.dependency-management' version '1.1.0'
+	id 'com.diffplug.spotless' version '6.18.0'
 }
 
 group = 'hr.fer.rsikspr'
@@ -14,6 +15,16 @@ configurations {
 	}
 }
 
+spotless {
+	java {
+		importOrder()
+		removeUnusedImports()
+
+		palantirJavaFormat('2.30.0').style("GOOGLE")
+		formatAnnotations()
+	}
+}
+
 repositories {
 	mavenCentral()
 }
@@ -23,6 +34,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.postgresql:postgresql:42.6.0'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
+	implementation 'org.modelmapper:modelmapper:3.1.1'
+	implementation('org.springframework.boot:spring-boot-starter-validation')
+
 
 	compileOnly 'org.projectlombok:lombok'
 
