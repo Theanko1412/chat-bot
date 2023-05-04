@@ -3,6 +3,7 @@ package hr.fer.rsikspr.chatbot.controller;
 import hr.fer.rsikspr.chatbot.model.Conversation;
 import hr.fer.rsikspr.chatbot.model.dto.ConversationDTO;
 import hr.fer.rsikspr.chatbot.service.ConversationService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/conversations")
+@Tag(name = "Conversation")
 public class ConversationController {
   private final ConversationService conversationService;
   private final ModelMapper modelMapper;
