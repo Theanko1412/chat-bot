@@ -1,6 +1,6 @@
 package hr.fer.rsikspr.chatbot.repository;
 
-import hr.fer.rsikspr.chatbot.model.Message;
+import hr.fer.rsikspr.chatbot.model.entity.Message;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

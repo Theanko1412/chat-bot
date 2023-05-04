@@ -1,4 +1,4 @@
-package hr.fer.rsikspr.chatbot.model;
+package hr.fer.rsikspr.chatbot.model.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

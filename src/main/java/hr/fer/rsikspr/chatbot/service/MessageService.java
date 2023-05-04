@@ -1,7 +1,7 @@
 package hr.fer.rsikspr.chatbot.service;
 
-import hr.fer.rsikspr.chatbot.model.Conversation;
-import hr.fer.rsikspr.chatbot.model.Message;
+import hr.fer.rsikspr.chatbot.model.entity.Conversation;
+import hr.fer.rsikspr.chatbot.model.entity.Message;
 import hr.fer.rsikspr.chatbot.repository.ConversationRepository;
 import hr.fer.rsikspr.chatbot.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;

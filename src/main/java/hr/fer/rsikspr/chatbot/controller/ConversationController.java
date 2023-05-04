@@ -1,6 +1,6 @@
 package hr.fer.rsikspr.chatbot.controller;
 
-import hr.fer.rsikspr.chatbot.model.Conversation;
+import hr.fer.rsikspr.chatbot.model.entity.Conversation;
 import hr.fer.rsikspr.chatbot.model.dto.ConversationDTO;
 import hr.fer.rsikspr.chatbot.service.ConversationService;
 import io.swagger.v3.oas.annotations.tags.Tag;

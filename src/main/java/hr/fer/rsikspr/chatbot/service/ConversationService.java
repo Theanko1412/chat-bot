@@ -1,6 +1,6 @@
 package hr.fer.rsikspr.chatbot.service;
 
-import hr.fer.rsikspr.chatbot.model.Conversation;
+import hr.fer.rsikspr.chatbot.model.entity.Conversation;
 import hr.fer.rsikspr.chatbot.repository.ConversationRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.constraints.NotBlank;
