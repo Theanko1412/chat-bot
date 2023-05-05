@@ -9,6 +9,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.annotations.GenericGenerator;
@@ -40,6 +41,7 @@ public class Message {
   @JoinColumn(name = "conversation_id", nullable = false)
   private Conversation conversation;
 
+  @Builder
   public Message(@NonNull String sender, @NonNull String receiver, @NonNull String content) {
     this.sender = sender;
     this.receiver = receiver;

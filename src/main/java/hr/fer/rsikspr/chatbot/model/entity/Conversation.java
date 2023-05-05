@@ -11,6 +11,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.annotations.GenericGenerator;
@@ -44,6 +45,7 @@ public class Conversation {
   @Column(name = "closed_at")
   private LocalDateTime closedAt;
 
+  @Builder
   public Conversation(@NonNull String initialSender, @NonNull String initialReceiver) {
     this.initialSender = initialSender;
     this.initialReceiver = initialReceiver;

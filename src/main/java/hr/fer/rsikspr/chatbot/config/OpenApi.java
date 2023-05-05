@@ -40,7 +40,8 @@ public class OpenApi {
             .description("Chatbot API for the RSiKSPR course")
             .version(version)
             .contact(contact))
-        .servers(Collections.singletonList(
-            new Server().description("Local server").url("http://localhost:" + port + contextPath)));
+        .servers(Collections.singletonList(new Server()
+            .description("Local server")
+            .url("http://localhost:" + port + contextPath)));
   }
 }

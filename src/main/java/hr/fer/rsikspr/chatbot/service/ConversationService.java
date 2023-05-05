@@ -1,34 +1,17 @@
 package hr.fer.rsikspr.chatbot.service;
 
 import hr.fer.rsikspr.chatbot.model.entity.Conversation;
-import hr.fer.rsikspr.chatbot.repository.ConversationRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.constraints.NotBlank;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
+import hr.fer.rsikspr.chatbot.model.entity.Message;
 
-@Service
-@Validated
-@RequiredArgsConstructor
-public class ConversationService {
+public interface ConversationService {
 
-  private final ConversationRepository conversationRepository;
+  Conversation getConversationById(String conversationId);
 
-  public Conversation getConversationById(@NotBlank String conversationId) {
-    return conversationRepository
-        .findConversationById(conversationId)
-        .orElseThrow(
-            () -> new EntityNotFoundException("Conversation with a given id doesnt exist."));
-  }
+  Conversation getConversationByParticipants(String sender, String receiver);
 
-  public Conversation getConversationByParticipants(
-      @NotBlank String sender, @NotBlank String receiver) {
-    return conversationRepository
-        .findConversationByInitialSenderAndInitialReceiver(sender, receiver)
-        .orElseGet(() -> conversationRepository
-            .findConversationByInitialSenderAndInitialReceiver(receiver, sender)
-            .orElseThrow(() -> new EntityNotFoundException(String.format(
-                "Conversation with a pair %s and %s doesn't exist.", sender, receiver))));
-  }
+  Conversation closeConversation(String conversationId);
+
+  Conversation createConversation(String sender, String receiver);
+
+  Conversation updateConversationWithMessage(Conversation conversation, Message message);
 }
