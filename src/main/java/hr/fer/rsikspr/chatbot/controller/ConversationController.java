@@ -9,26 +9,27 @@ import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/conversations")
+@RequestMapping(value = "/conversations", produces = "application/json")
 @Tag(name = "Conversations")
 public class ConversationController {
   private final ConversationServiceImpl conversationServiceImpl;
   private final ModelMapper modelMapper;
 
-  @GetMapping("/{conversationId}")
+  @GetMapping(value = "/{conversationId}")
   public ConversationDTO getConversation(@PathVariable String conversationId) {
     Conversation conversation = conversationServiceImpl.getConversationById(conversationId);
 
     return modelMapper.map(conversation, ConversationDTO.class);
   }
 
-  @GetMapping("/search")
+  @GetMapping(value = "/search")
   public ConversationDTO getConversationByParticipants(
       @RequestParam("sender") String sender, @RequestParam("receiver") String receiver) {
 
@@ -38,7 +39,7 @@ public class ConversationController {
     return modelMapper.map(conversation, ConversationDTO.class);
   }
 
-  @PatchMapping("/{conversationId}")
+  @PostMapping(value = "/{conversationId}/close", consumes = "application/json")
   public ConversationDTO closeConversation(@PathVariable String conversationId) {
     Conversation conversation = conversationServiceImpl.closeConversation(conversationId);
 
