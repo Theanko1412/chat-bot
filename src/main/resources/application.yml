@@ -3,7 +3,7 @@ spring:
     name: Chatbot - API
     version: 0.1.0
   datasource:
-    url: jdbc:postgresql://localhost:5433/chatbot
+    url: jdbc:postgresql://localhost:5432/chatbot
     username: user
     password: password
     driver-class-name: org.postgresql.Driver

@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: chatbot
+    ports:
+      - "5432:5432"
+  chat-bot:
+    build:
+      context: ../../../
+      dockerfile: ./support/docker/chat-bot/Dockerfile
+    image: chat-bot:latest
+    restart: unless-stopped
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/chatbot
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+networks:
+  default:
+    name: chat-bot-network

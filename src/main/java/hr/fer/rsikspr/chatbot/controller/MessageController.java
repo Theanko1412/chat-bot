@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/messages")
+@RequestMapping(value = "/messages", produces = "application/json")
 @Tag(name = "Messages")
 public class MessageController {
 
   private final MessageServiceImpl messageServiceImpl;
   private final ModelMapper modelMapper;
 
-  @PostMapping
+  @PostMapping(consumes = "application/json")
   public ResponseEntity<MessageDTO> sendMessage(@Valid @RequestBody MessageDTO messageDTO) {
     Message newMessage = modelMapper.map(messageDTO, Message.class);
     newMessage = messageServiceImpl.publishMessage(newMessage);
