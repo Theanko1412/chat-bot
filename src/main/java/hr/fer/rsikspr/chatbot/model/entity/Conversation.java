@@ -11,12 +11,14 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.annotations.GenericGenerator;
 
 @Data
+@AllArgsConstructor // for testing purposes
 @Entity
 @Table(name = "conversation")
 public class Conversation {
@@ -57,7 +59,8 @@ public class Conversation {
     createdAt = LocalDateTime.now();
   }
 
-  public void addMessageToList(Message message) {
+  public Message addMessageToList(Message message) {
     messages.add(message);
+    return message;
   }
 }
