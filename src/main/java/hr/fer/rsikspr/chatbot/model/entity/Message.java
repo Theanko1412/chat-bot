@@ -9,12 +9,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.annotations.GenericGenerator;
 
 @Data
+@AllArgsConstructor // for testing purposes
 @Entity
 @Table(name = "message")
 public class Message {

@@ -1,5 +1,6 @@
 package hr.fer.rsikspr.chatbot.service.impl;
 
+import hr.fer.rsikspr.chatbot.exceptions.ChatbotExceptions.ConversationNotFoundException;
 import hr.fer.rsikspr.chatbot.model.entity.Conversation;
 import hr.fer.rsikspr.chatbot.model.entity.Message;
 import hr.fer.rsikspr.chatbot.repository.MessageRepository;
@@ -19,10 +20,11 @@ public class MessageServiceImpl implements MessageService {
   // conversation is same for 2 participants no matter who is sender and who is receiver
   public Message publishMessage(Message message) {
 
-    Conversation conversation = conversationServiceImpl.getConversationByParticipants(
-        message.getSender(), message.getReceiver());
-
-    if (conversation == null) {
+    Conversation conversation;
+    try {
+      conversation = conversationServiceImpl.getConversationByParticipants(
+          message.getSender(), message.getReceiver());
+    } catch (ConversationNotFoundException e) {
       conversation =
           conversationServiceImpl.createConversation(message.getSender(), message.getReceiver());
     }
@@ -36,6 +38,16 @@ public class MessageServiceImpl implements MessageService {
 
   @Override
   public Message updateMessageWithConversation(Message message, Conversation conversation) {
+    if (message == null) {
+      throw new IllegalArgumentException("Message can't be null");
+    } else if (conversation == null) {
+      throw new IllegalArgumentException("Conversation can't be null");
+    }
+
+    if (message.getConversation() != null) {
+      throw new IllegalArgumentException("Message already has conversation");
+    }
+
     message.setConversation(conversation);
     return messageRepository.save(message);
   }

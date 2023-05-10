@@ -1,4 +1,4 @@
-# publish new message
+### publish new message
 POST localhost:8080/api/v1/messages
 Content-Type: application/json
 
@@ -15,15 +15,58 @@ Content-Type: application/json
   client.global.set("receiver", response.body.receiver);
 %}
 
-###
-# get conversation by participants
+### get conversation by participants
 GET localhost:8080/api/v1/conversations/search?sender={{sender}}&receiver={{receiver}}
 
-###
-# get conversation by id
+### get conversation by id
 GET localhost:8080/api/v1/conversations/{{conversationId}}
 
-###
-# close conversation
+### close conversation
 POST localhost:8080/api/v1/conversations/{{conversationId}}/close
 Content-Type: application/json
+
+
+### openapi bot
+POST https://api.openai.com/v1/engines/text-curie-001/completions
+Content-Type: application/json
+
+{
+  "prompt": "Tell me a joke.",
+  "max_tokens": 30,
+  "n": 1,
+  "stop": null,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "presence_penalty": 0.0,
+  "frequency_penalty": 0.0,
+  "best_of": 1,
+  "echo": false
+}
+### openai chat
+POST https://api.openai.com/v1/chat/completions
+Content-Type: application/json
+
+{
+  "model": "gpt-3.5-turbo",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are an assistant that speaks like Spongebob."
+    },
+    {
+      "role": "user",
+      "content": "tell me a joke"
+    },
+    {
+      "role": "assistant",
+      "content": "Why did the seagull fly over the sea?\nBecause if it flew over the bay, it would be a bagel! Ahahaha!"
+    },
+    {
+      "role": "user",
+      "content": "I dont get it..."
+    }
+  ],
+  "max_tokens": 200,
+  "temperature": 0.7,
+  "top_p": 1
+}

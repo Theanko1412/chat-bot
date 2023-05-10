@@ -10,6 +10,7 @@ services:
       POSTGRES_DB: chatbot
     ports:
       - "5432:5432"
+
   chat-bot:
     build:
       context: ../../../
