@@ -38,6 +38,16 @@ public class MessageServiceImpl implements MessageService {
 
   @Override
   public Message updateMessageWithConversation(Message message, Conversation conversation) {
+    if (message == null) {
+      throw new IllegalArgumentException("Message can't be null");
+    } else if (conversation == null) {
+      throw new IllegalArgumentException("Conversation can't be null");
+    }
+
+    if (message.getConversation() != null) {
+      throw new IllegalArgumentException("Message already has conversation");
+    }
+
     message.setConversation(conversation);
     return messageRepository.save(message);
   }
