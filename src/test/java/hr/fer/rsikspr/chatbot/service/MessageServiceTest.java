@@ -57,8 +57,6 @@ class MessageServiceTest {
 
     Conversation conversation = null;
 
-    when(messageRepository.save(any(Message.class))).thenReturn(message);
-
     assertThrows(IllegalArgumentException.class, () -> {
       messageServiceImpl.updateMessageWithConversation(message, conversation);
     });
