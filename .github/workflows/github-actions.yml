@@ -27,6 +27,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Run chmod to make gradlew executable
+        run: chmod +x ./gradlew
       - name: Test with Gradle
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
         with:
@@ -36,6 +38,8 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - name: Run chmod to make gradlew executable
+        run: chmod +x ./gradlew
       - name: Package with gradle
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
         with:
