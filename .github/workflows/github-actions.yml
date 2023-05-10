@@ -20,13 +20,16 @@ jobs:
           arguments: assemble
 
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Test with Gradle
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
         with:
           arguments: check
+
   package:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Package with gradle
