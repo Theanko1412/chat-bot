@@ -5,7 +5,6 @@ on: [push]
 jobs:
 
   build:
-    needs: init
     runs-on: ubuntu-latest
     steps:
       - name: Run chmod to make gradlew executable
