@@ -14,8 +14,11 @@ public class GlobalExceptionHandler {
   @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Conversation not found")
   @ExceptionHandler(ConversationNotFoundException.class)
   public ResponseEntity<ApiError> handleConversationNotFoundException(
-      ConversationNotFoundException e, HttpServletRequest request) {
-    String path = request.getContextPath() + request.getServletPath();
+      ConversationNotFoundException e,
+      HttpServletRequest request) {
+    String path =
+        request.getContextPath() +
+            request.getServletPath();
 
     ApiError apiError = new ApiError(
         HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase(), e.getMessage(), path);
