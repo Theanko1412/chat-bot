@@ -22,29 +22,15 @@ jobs:
         with:
           arguments: assemble
 
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Run chmod to make gradlew executable
-        run: chmod +x ./gradlew
       - name: Test with Gradle
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
         with:
           arguments: check
 
-  package:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Run chmod to make gradlew executable
-        run: chmod +x ./gradlew
       - name: Package with gradle
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
         with:
-          arguments: ./gradlew bootJar
+          arguments: bootJar
       - uses: actions/upload-artifact@v3
         with:
           name: Package
