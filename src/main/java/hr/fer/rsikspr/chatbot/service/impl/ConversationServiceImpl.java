@@ -6,6 +6,7 @@ import hr.fer.rsikspr.chatbot.model.entity.Message;
 import hr.fer.rsikspr.chatbot.repository.ConversationRepository;
 import hr.fer.rsikspr.chatbot.service.ConversationService;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,17 @@ public class ConversationServiceImpl implements ConversationService {
             conversationRepository.findConversationByInitialSenderAndInitialReceiverAndClosedAtNull(
                 receiver, sender))
         .orElseThrow(() -> new ConversationNotFoundException("Conversation doesnt exist."));
+  }
+
+  @Override
+  public List<Conversation> getConversationsBetweenDates(
+      LocalDateTime startDate, LocalDateTime endDate) {
+    if (startDate == null || endDate == null)
+      throw new IllegalArgumentException("Both start and end date must be given.");
+
+    return conversationRepository
+        .findConversationsByCreatedAtBetween(startDate, endDate)
+        .orElse(null);
   }
 
   @Override

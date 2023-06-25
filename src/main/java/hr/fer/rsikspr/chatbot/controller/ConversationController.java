@@ -4,6 +4,8 @@ import hr.fer.rsikspr.chatbot.model.dto.ConversationDTO;
 import hr.fer.rsikspr.chatbot.model.entity.Conversation;
 import hr.fer.rsikspr.chatbot.service.impl.ConversationServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +39,19 @@ public class ConversationController {
         conversationServiceImpl.getConversationByParticipants(participant1, participant2);
 
     return modelMapper.map(conversation, ConversationDTO.class);
+  }
+
+  @GetMapping(value = "/searchByDate")
+  public List<ConversationDTO> getConversationsBetweenDates(
+      @RequestParam("startDate") LocalDateTime startDate,
+      @RequestParam("endDate") LocalDateTime endDate) {
+
+    List<Conversation> conversations =
+        conversationServiceImpl.getConversationsBetweenDates(startDate, endDate);
+
+    return conversations.stream()
+        .map(conversation -> modelMapper.map(conversation, ConversationDTO.class))
+        .toList();
   }
 
   @PostMapping(value = "/{conversationId}/close", consumes = "application/json")

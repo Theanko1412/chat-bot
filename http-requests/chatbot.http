@@ -18,6 +18,9 @@ Content-Type: application/json
 ### get conversation by participants
 GET {{url}}/api/v1/conversations/search?participant1={{sender}}&participant2={{receiver}}
 
+### get conversations between dates
+GET {{url}}/api/v1/conversations/searchByDate?startDate=2023-06-24T10:34:22&endDate=2023-06-27T20:34:23
+
 ### get conversation by id
 GET {{url}}/api/v1/conversations/{{conversationId}}
 
@@ -47,6 +50,9 @@ Content-Type: application/json
 
 ### get conversation by participants
 GET {{url}}/api/v1/conversations/search?participant1={{sender}}&participant2={{receiver}}
+
+### get conversations between dates
+GET {{url}}/api/v1/conversations/searchByDate?startDate=2023-06-24T10:34:22&endDate=2023-06-27T20:34:23
 
 ### get conversation by id
 GET {{url}}/api/v1/conversations/{{conversationId}}
