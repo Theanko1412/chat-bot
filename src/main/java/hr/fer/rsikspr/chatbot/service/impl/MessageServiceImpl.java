@@ -18,6 +18,7 @@ public class MessageServiceImpl implements MessageService {
 
   // adding message to conversation, if conversation doesn't exist, it will be created
   // conversation is same for 2 participants no matter who is sender and who is receiver
+  @Override
   public Message publishMessage(Message message) {
 
     Conversation conversation;

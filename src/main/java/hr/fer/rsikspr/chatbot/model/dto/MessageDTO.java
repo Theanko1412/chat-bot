@@ -30,8 +30,8 @@ public class MessageDTO {
       title = "receiver",
       description = "Message receiver",
       example = "0012345678",
-      requiredMode = RequiredMode.REQUIRED)
-  @NotNull private String receiver;
+      requiredMode = RequiredMode.NOT_REQUIRED)
+  private String receiver;
 
   @Schema(
       title = "content",
