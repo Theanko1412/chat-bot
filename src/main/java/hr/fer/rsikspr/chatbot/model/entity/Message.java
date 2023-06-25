@@ -33,7 +33,7 @@ public class Message {
   @NotNull @Column(name = "receiver")
   private String receiver;
 
-  @NotNull @Column(name = "content")
+  @NotNull @Column(name = "content", length = 1000)
   private String content;
 
   @Column(name = "timestamp")

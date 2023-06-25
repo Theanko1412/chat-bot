@@ -4,6 +4,9 @@ version: '3.8'
 # then run docker-compose up --scale chat-bot=3
 # this will create db and 3 instances of chat-bot with nginx load balancing
 
+# to tag the image and publish it to prviate docker hub
+# docker tag chat-bot:latest <docker-hub-username>/<docker-hub-repo>:chat-bot-<version>
+
 services:
   postgres:
     image: postgres:latest
