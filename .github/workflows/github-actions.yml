@@ -119,7 +119,7 @@ jobs:
           for tag in "${tags[@]}"; do
             prefix=$(echo "$tag" | awk -F: '{print $1}')
             version=$(echo "$tag" | awk -F: '{print $NF}')
-            modified_tags+=("$prefix:${{ steps.repo.outputs.repo }}-$version")
+            modified_tags+=("$prefix:${{ steps.repo.outputs.repo }}$version")
           done
           echo "::set-output name=tags::${modified_tags[*]}"
         shell: bash
