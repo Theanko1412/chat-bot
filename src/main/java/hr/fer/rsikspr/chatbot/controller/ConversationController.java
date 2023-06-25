@@ -30,10 +30,11 @@ public class ConversationController {
 
   @GetMapping(value = "/search")
   public ConversationDTO getConversationByParticipants(
-      @RequestParam("sender") String sender, @RequestParam("receiver") String receiver) {
+      @RequestParam("participant1") String participant1,
+      @RequestParam("participant2") String participant2) {
 
     Conversation conversation =
-        conversationServiceImpl.getConversationByParticipants(sender, receiver);
+        conversationServiceImpl.getConversationByParticipants(participant1, participant2);
 
     return modelMapper.map(conversation, ConversationDTO.class);
   }

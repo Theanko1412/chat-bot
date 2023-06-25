@@ -15,6 +15,7 @@ public class ConversationServiceImpl implements ConversationService {
 
   private final ConversationRepository conversationRepository;
 
+  @Override
   public Conversation getConversationById(String conversationId) {
     if (conversationId == null || conversationId.isBlank())
       throw new IllegalArgumentException("Given conversation id is null.");
@@ -25,6 +26,7 @@ public class ConversationServiceImpl implements ConversationService {
             () -> new ConversationNotFoundException("Conversation with a given id doesnt exist."));
   }
 
+  @Override
   public Conversation getConversationByParticipants(String sender, String receiver) {
     if (sender == null || sender.isBlank() || receiver == null || receiver.isBlank())
       throw new IllegalArgumentException("Both sender and receiver must be given.");

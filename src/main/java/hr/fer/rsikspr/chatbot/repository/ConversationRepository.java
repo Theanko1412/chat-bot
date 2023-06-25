@@ -10,6 +10,8 @@ public interface ConversationRepository extends JpaRepository<Conversation, Stri
 
   Optional<Conversation> findConversationById(String id);
 
+  Optional<Conversation> findConversationByIdAndClosedAtNull(String id);
+
   // TODO: move to custom query
   Optional<Conversation> findConversationByInitialSenderAndInitialReceiverAndClosedAtNull(
       String initialSender, String initialReceiver);

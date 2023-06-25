@@ -11,4 +11,25 @@ public class ChatbotExceptions {
       super(message);
     }
   }
+
+  public static class OpenAiWebClientException extends ChatbotException {
+
+    public OpenAiWebClientException(String message) {
+      super(message);
+    }
+  }
+
+  public static class OpenAiServerException extends ChatbotException {
+
+    public OpenAiServerException(String message) {
+      super(message);
+    }
+  }
+
+  public static class NotEnoughCreditException extends ChatbotException {
+
+    public NotEnoughCreditException(String message) {
+      super(message);
+    }
+  }
 }
