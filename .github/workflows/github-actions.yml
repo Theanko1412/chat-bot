@@ -58,6 +58,7 @@ jobs:
         with:
           name: Package
           path: build/libs
+      - run: ls -la
 
   tagged-release:
     name: "Tagged release"
@@ -66,16 +67,18 @@ jobs:
     needs: package
 
     steps:
+      - run: ls -la
       - name: Download release artifact
         uses: actions/download-artifact@v2
         with:
           name: Package
+      - run: ls -la
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           draft: false
-          files: "/Package/build/libs/*.jar"
+          files: "/build/libs/*.jar"
 
   push-to-docker-registry:
     name: "Push to Docker Registry"
@@ -99,6 +102,7 @@ jobs:
         with:
           images: theanko1412/home-server
 
+      - run: ls -la
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
